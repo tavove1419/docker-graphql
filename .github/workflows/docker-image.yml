@@ -30,21 +30,25 @@ jobs:
       env: 
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        NEW_VERSION: ${{ steps.version.outputs.version }}
+        
       run: |
         echo "Iniciando login"
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "Nueva version: $NEW_VERSION!!!!!!!"
         echo "Fin del login"
         
-    # - name: Build Docker Image - Construir Imagen
-    #   run: |
-    #     docker build -t tavo1419/docker-graphql:0.0.0.2 .
-    #     docker build -t tavo1419/docker-graphql:latest .
-    # - name: Push Docker Image - Subir la imagen a DockerHub
-    #   run: |
-    #     docker push tavo1419/docker-graphql:0.0.0.2
-    #     docker push tavo1419/docker-graphql:latest
+    - name: Build Docker Image - Construir Imagen
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker build -t tavo1419/docker-graphql:$NEW_VERSION .
+        docker build -t tavo1419/docker-graphql:latest .
+        
+    - name: Push Docker Image - Subir la imagen a DockerHub
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+      run: |
+        docker push tavo1419/docker-graphql:$NEW_VERSION
+        docker push tavo1419/docker-graphql:latest
 
 
     
