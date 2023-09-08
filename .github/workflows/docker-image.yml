@@ -28,6 +28,7 @@ jobs:
     - name: Build Docker Image - Construir Imagen
       run: |
         docker build -t tavo1419/docker-graphql:0.0.0.2 .
+        docker build -t tavo1419/docker-graphql:latest .
     - name: Push Docker Image - Subir la imagen a DockerHub
       run: |
         docker push tavo1419/docker-graphql:0.0.0.2
