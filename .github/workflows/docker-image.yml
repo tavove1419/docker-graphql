@@ -31,6 +31,7 @@ jobs:
     - name: Push Docker Image - Subir la imagen a DockerHub
       run: |
         docker push tavo1419/docker-graphql:0.0.0.2
+        docker push tavo1419/docker-graphql:latest
 
 
     
